@@ -1,20 +1,18 @@
 <?php
 session_start();
 require_once 'db.php';
-
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['user']);
     $password = trim($_POST['password']);
-    // Проверка администратора
     if ($username === 'admin' && $password === 'Password*') {
         $_SESSION['user'] = 'admin';
         $_SESSION['role'] = 'admin';
         header('Location: admin.php');
         exit;
     }
-    // Проверка обычного пользователя
+
     $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
@@ -36,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход \ Пятерочка</title>
+    <title>Вход</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
