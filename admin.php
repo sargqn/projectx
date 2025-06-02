@@ -7,7 +7,6 @@ if (!isset($_SESSION['user']) || $_SESSION['role'] !== 'admin') {
     exit;
 }
 
-// Обновление продажи
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_sale'])) {
     $id = intval($_POST['id']);
     $amount = floatval($_POST['amount']);
@@ -17,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_sale'])) {
     $stmt->execute([$amount, $date, $id]);
 }
 
-// Получение всех продаж
 $sales = $db->query("SELECT s.*, u.fio FROM sales s JOIN users u ON s.user_id = u.id ORDER BY s.date DESC")->fetchAll();
 ?>
 
@@ -26,13 +24,12 @@ $sales = $db->query("SELECT s.*, u.fio FROM sales s JOIN users u ON s.user_id = 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Админ-панель \ Пятерочка</title>
+    <title>Админ-панель</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Админ-панель</h1>
     <p>Вы вошли как администратор: <?= $_SESSION['user'] ?> (<a href="logout.php">Выйти</a>)</p>
-    
     <h2>Все продажи</h2>
     <table>
         <tr>
