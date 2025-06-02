@@ -1,8 +1,8 @@
 <?php
-$host = 'localhost'; // Хост БД
-$dbname = 'pyterochka'; // Имя БД
-$username = 'root'; // Имя пользователя БД
-$password = ''; // Пароль БД (пустой по умолчанию в XAMPP)
+$host = 'localhost';
+$dbname = 'test';
+$username = 'root';
+$password = '';
 
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
