@@ -10,8 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fio = trim($_POST['fio']);
     $email = trim($_POST['email']);
     $position = trim($_POST['position']);
-    
-    // Валидация
+
     if (empty($username)) $errors[] = 'Логин обязателен';
     if (strlen($password) < 6) $errors[] = 'Пароль должен быть не менее 6 символов';
     if (!preg_match('/[A-Z]/', $password)) $errors[] = 'Пароль должен содержать хотя бы одну заглавную букву';
@@ -21,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Введите корректный email';
     if (empty($position)) $errors[] = 'Выберите должность';
     
-    // Проверка уникальности логина
     $stmt = $db->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->execute([$username]);
     if ($stmt->fetch()) $errors[] = 'Этот логин уже занят';
@@ -40,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Регистрация \ Пятерочка</title>
+    <title>Регистрация</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
