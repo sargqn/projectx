@@ -6,7 +6,7 @@ if (!isset($_SESSION['user'])) {
     header('Location: login.php');
     exit;
 }
-// Добавление новой продажи
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_sale'])) {
     $amount = floatval($_POST['amount']);
     $date = $_POST['date'];
@@ -20,7 +20,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_sale'])) {
     $stmt = $db->prepare("INSERT INTO sales (user_id, amount, date, status) VALUES (?, ?, ?, ?)");
     $stmt->execute([$_SESSION['user_id'], $amount, $date, $status]);
 }
-// Получение продаж текущего пользователя
 $stmt = $db->prepare("SELECT * FROM sales WHERE user_id = ? ORDER BY date DESC");
 $stmt->execute([$_SESSION['user_id']]);
 $sales = $stmt->fetchAll();
@@ -31,7 +30,7 @@ $sales = $stmt->fetchAll();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Продажи \ Пятерочка</title>
+    <title>Продажи</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -74,7 +73,6 @@ $sales = $stmt->fetchAll();
     </table>
     
     <script>
-        // Показываем поле для другого статуса при выборе "Иной статус"
         document.querySelector('select[name="status"]').addEventListener('change', function() {
             const otherField = document.querySelector('input[name="other_status"]');
             otherField.style.display = this.value === 'other' ? 'block' : 'none';
