@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Главная \ Пятерочка</title>
+    <title>Главная</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Добро пожаловать в систему "Пятерочка"</h1>
+    <h1>Добро пожаловать в систему"</h1>
     <a href="./login.php" class="link__login-register">Вход</a>
     <a href="./register.php" class="link__login-register">Регистрация</a>
-    <select name="" id="">
-        
-    </select>
 </body>
 </html>
