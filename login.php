@@ -2,17 +2,16 @@
 session_start();
 require_once 'db.php';
 $error = '';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['user']);
     $password = trim($_POST['password']);
+
     if ($username === 'admin' && $password === 'Password*') {
         $_SESSION['user'] = 'admin';
         $_SESSION['role'] = 'admin';
         header('Location: admin.php');
         exit;
     }
-
     $stmt = $db->prepare("SELECT * FROM users WHERE username = ?");
     $stmt->execute([$username]);
     $user = $stmt->fetch();
@@ -28,7 +27,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
